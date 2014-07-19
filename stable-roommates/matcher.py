@@ -35,10 +35,10 @@ class Person:
 	# crosses off a potential match
 	def cross_off(self,person):
 		#removes each from each other's preference array
-		if person.name in self.preferences:
-			self.preferences.remove(person.name)
-		if self.name in person.preferences:
-			person.preferences.remove(self.name)
+		if person in self.preferences:
+			self.preferences.remove(person)
+		if self in person.preferences:
+			person.preferences.remove(self)
 
 	#return just the names of the people in the preferences
 	def getPrefs(self):
@@ -68,8 +68,8 @@ for person_name,person_object in Person.ppl.items():   # the person
 
 # PHASE 1
 
-# for person in Person.ppl.values():
-# 	person.propose_to(person.preferences[0])
+for person in Person.ppl.values():
+	person.propose_to(person.preferences[0])
 
 
 
