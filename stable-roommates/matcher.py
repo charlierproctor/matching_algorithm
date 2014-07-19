@@ -1,12 +1,16 @@
 # Stable Roommate Algorithm
 import pprint
-prefs = {
-'1': ['3','4','2','6','5'],
-'2': ['6','5','4','1','3'],
-'3': ['2','4','5','1','6'],
-'4': ['5','2','3','6','1'],
-'5': ['3','1','2','4','6'],
-'6': ['5','1','3','4','2']}
+from tester import Tester 
+
+# prefs = {
+# '1': ['3','4','2','6','5'],
+# '2': ['6','5','4','1','3'],
+# '3': ['2','4','5','1','6'],
+# '4': ['5','2','3','6','1'],
+# '5': ['3','1','2','4','6'],
+# '6': ['5','1','3','4','2']}
+
+prefs = Tester.random_matrix(4)
 
 
 class Person:
@@ -85,7 +89,7 @@ for person in Person.ppl.values():
 if not phase_one_success():
 	print("PHASE 1 FAILURE -- NO STABLE MATCHING POSSIBLE")
 
-print("Stable Table -- Phase 1 Complete:")
+print("Phase 1 Complete:")
 pprint.pprint(Person.prefsMatrix())
 
 
@@ -126,7 +130,5 @@ while current_person:
 
 print("Phase 2 Complete:")
 pprint.pprint(Person.prefsMatrix())
-
-
 
 
