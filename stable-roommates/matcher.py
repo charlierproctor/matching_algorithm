@@ -31,6 +31,8 @@ class Person:
 
 		# need to cross off those behind current proposal
 		prefs_to_chop = current_prefs[(current_prefs.index(somebody)+1):]  
+		# this is what causes a rotation to halt!! --> ie, we have reached another stable table
+		# when there is nobody left to cross off.
 
 		#use the cross_off method to cross off these matches...
 		for person in prefs_to_chop:
