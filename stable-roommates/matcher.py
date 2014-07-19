@@ -35,10 +35,9 @@ class Person:
 	# crosses off a potential match
 	def cross_off(self,person):
 		#removes each from each other's preference array
-		if person in self.preferences:
-			self.preferences.remove(person)
-		if self in person.preferences:
-			person.preferences.remove(self)
+		self.preferences.remove(person)
+		person.preferences.remove(self)
+		person.propose_to(person.preferences[0])
 
 	#return just the names of the people in the preferences
 	def getPrefs(self):
@@ -71,16 +70,17 @@ pprint.pprint(Person.prefsMatrix())
 
 # PHASE 1
 
-def done_with_phase_one():
+def phase_one_success():
 	arr = []
 	for person in Person.ppl.values():  
 		arr.append(person.preferences[0].name)
 	return len(arr)==len(set(arr))
 
-while not done_with_phase_one():
-	for person in Person.ppl.values():
-		person.propose_to(person.preferences[0])
+for person in Person.ppl.values():
+	person.propose_to(person.preferences[0])
 
+if not phase_one_success():
+	print("PHASE 1 FAILURE -- NO STABLE MATCHING POSSIBLE")
 
 print("Stable Table -- Phase 1 Complete:")
 pprint.pprint(Person.prefsMatrix())
