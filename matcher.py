@@ -37,16 +37,102 @@ class Person:
 	def single(self):
 		return self.fiance == None
 
+	#engage somebody
 	def engage(self, person):
 		self.fiance = person
 		person.fiance = self
 
+	#determine whether the person is a better choice (higher in the list)
 	def better_choice(self, person):
 		self.preferences.index(person) < self.preferences.index(self.fiance)
+  
+  	#propose to somebody
+	def propose_to(self,person):
+		self.proposals.append(person)
+		person.proposal_from(self)
 
+	#receive a proposal from the opposite sex
 	def proposal_from(self, person):
+		#if single, accept!
 		if self.single():
 			self.engage(person)
+			print(self.name + " is single and accepts " + person.name + "'s proposal")
+		#if the proposer is a better choice, accept!
 		elif self.better_choice(person):
 			self.fiance.free
 			self.engage(person)
+			print(self.name + " is dumping " + fiance.name + " for " + person.name)
+		#otherwise, reject!
+		else:
+			print(self.name + " rejects " + person.name)
+
+
+# create men, women hashes which have names as keys
+# and the corresponding person objects as values
+men = {}
+for guy in guyprefers:
+	men[guy] = Person(guy)
+
+women = {}
+for gal in galprefers:
+	women[gal] = Person(gal)
+
+# for all men, add the appropriate women objects to
+# their preference arrays
+for man_name,man_object in men.items():
+	for woman_name in guyprefers[man_name]:
+		man_object.preferences.append(women[woman_name])
+
+# for all women...
+for woman_name,woman_object in women.items():
+	for man_name in galprefers[woman_name]:
+		woman_object.preferences.append(men[man_name])
+
+#find all the single men
+def find_single(gender):
+	for person,person_object in gender.items():
+		if person_object.single():
+			print(person_object.name + " is single")
+			return person_object
+	return False
+
+#find the man's next top choice (whom he has yet to propose to)
+def find_next_best(man,women):
+	for woman in man.preferences:
+		if not (woman in man.proposals):
+			return woman
+
+#method to free everybody of their spouse
+def free_everybody():
+	for man in men:
+		men[man].free
+	for woman in women:
+		women[woman].free
+
+#core matching method
+def match(men,women):
+	free_everybody
+
+	done = False
+
+	while not done:
+		#find the single men
+		man = find_single(men)
+		if not man:
+			#if there aren't any, we're done
+			done = True
+		else:
+			#if there are, find the next best woman, and propose to her
+			woman = find_next_best(man,women)
+			print(man.name + " is proposing to " + woman.name)
+			man.propose_to(woman)
+
+#perform the match
+match(men,women)
+
+#print the results
+print("\nTHE RESULTS\n")
+for man_name,man_object in men.items():
+	print(man_name + ", " + man_object.fiance.name)
+
+
