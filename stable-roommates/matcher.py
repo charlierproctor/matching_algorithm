@@ -1,5 +1,5 @@
 # Stable Roommate Algorithm
-
+import pprint
 prefs = {
 '1': ['3','4','2','6','5'],
 '2': ['6','5','4','1','3'],
@@ -66,13 +66,21 @@ for person_name,person_object in Person.ppl.items():   # the person
 	for pref_name in prefs[person_name]:      #their preferences
 		person_object.preferences.append(Person.ppl[pref_name])
 
+print("Starting Preference Matrix -- Phase 0 Complete:")
+pprint.pprint(Person.prefsMatrix())
+
 # PHASE 1
 
-for person in Person.ppl.values():
-	person.propose_to(person.preferences[0])
+def done_with_phase_one():
+	arr = []
+	for person in Person.ppl.values():  
+		arr.append(person.preferences[0].name)
+	return len(arr)==len(set(arr))
+
+while not done_with_phase_one():
+	for person in Person.ppl.values():
+		person.propose_to(person.preferences[0])
 
 
-
-
-# SEE THE RESULTS
-print(Person.prefsMatrix())
+print("Stable Table -- Phase 1 Complete:")
+pprint.pprint(Person.prefsMatrix())
