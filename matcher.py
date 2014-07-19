@@ -44,7 +44,13 @@ class Person:
 
 	#determine whether the person is a better choice (higher in the list)
 	def better_choice(self, person):
-		self.preferences.index(person) < self.preferences.index(self.fiance)
+		print(self.name + " is evaluating her options...")
+		if self.preferences.index(person) < self.preferences.index(self.fiance):
+			print(self.name + " decides " + person.name + " is a better choice than current fiance " + self.fiance.name)
+		else:
+			print(self.name + " decides " + person.name + " is a worse choice than current fiance " + self.fiance.name)
+		# print(self.preferences.index(person) < self.preferences.index(self.fiance))
+		return self.preferences.index(person) < self.preferences.index(self.fiance)
   
   	#propose to somebody
 	def propose_to(self,person):
@@ -59,12 +65,12 @@ class Person:
 			print(self.name + " is single and accepts " + person.name + "'s proposal")
 		#if the proposer is a better choice, accept!
 		elif self.better_choice(person):
-			self.fiance.free
+			print(self.name + " is dumping " + self.fiance.name + " for " + person.name)
+			self.fiance.free()
 			self.engage(person)
-			print(self.name + " is dumping " + fiance.name + " for " + person.name)
 		#otherwise, reject!
 		else:
-			print(self.name + " rejects " + person.name)
+			print(self.name + " rejects " + person.name + " to keep " + self.fiance.name)
 
 
 # create men, women hashes which have names as keys
@@ -90,28 +96,31 @@ for woman_name,woman_object in women.items():
 
 #find all the single men
 def find_single(gender):
+	print("Looking for single men...")
 	for person,person_object in gender.items():
 		if person_object.single():
 			print(person_object.name + " is single")
 			return person_object
+	print("Nobody is single...")
 	return False
 
 #find the man's next top choice (whom he has yet to propose to)
 def find_next_best(man,women):
 	for woman in man.preferences:
 		if not (woman in man.proposals):
+			print(man.name + "'s next choice is " + woman.name)
 			return woman
 
 #method to free everybody of their spouse
 def free_everybody():
 	for man in men:
-		men[man].free
+		men[man].free()
 	for woman in women:
-		women[woman].free
+		women[woman].free()
 
 #core matching method
 def match(men,women):
-	free_everybody
+	free_everybody()
 
 	done = False
 
