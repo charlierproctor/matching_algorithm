@@ -70,12 +70,15 @@ pprint.pprint(Person.prefsMatrix())
 
 # PHASE 1
 
+# whether phase one was successful...
+# ie, the first columns hold distinct people
 def phase_one_success():
 	arr = []
 	for person in Person.ppl.values():  
 		arr.append(person.preferences[0].name)
 	return len(arr)==len(set(arr))
 
+#core of phase 1 --> everybody proposes to their top choice
 for person in Person.ppl.values():
 	person.propose_to(person.preferences[0])
 
@@ -88,6 +91,8 @@ pprint.pprint(Person.prefsMatrix())
 
 # PHASE 2
 
+# find a person who still has a second column
+# return False if there is no person left
 def find_person_with_second_column():
 	res = False
 	for person in Person.ppl.values():
@@ -96,18 +101,26 @@ def find_person_with_second_column():
 			break
 	return res
 
-current_person = find_person_with_second_column()
+current_person = find_person_with_second_column()    #find the initial person with a second column
 
-num_rotations = 1
+num_rotations = 1    # number of rotations so far...
 
+# while we still have a person with a second column
 while current_person: 
+
+	# grab their second choice preference
 	current_pref = current_person.preferences[1]
+
+	# and cross off that person's last preference.... which kicks off the rotation
 	current_pref.cross_off(current_pref.preferences[-1])
 
+	print("Rotating around person " + current_person.name + ", with preference " + current_pref.name)
 	print("Rotation #" + str(num_rotations) + ":")
+
 	num_rotations = num_rotations + 1
 	pprint.pprint(Person.prefsMatrix())	
 
+	# find another person to work with... if there is one
 	current_person = find_person_with_second_column()
 
 
