@@ -84,3 +84,36 @@ if not phase_one_success():
 
 print("Stable Table -- Phase 1 Complete:")
 pprint.pprint(Person.prefsMatrix())
+
+
+# PHASE 2
+
+def find_person_with_second_column():
+	res = False
+	for person in Person.ppl.values():
+		if len(person.preferences) > 1:
+			res = person
+			break
+	return res
+
+current_person = find_person_with_second_column()
+
+num_rotations = 1
+
+while current_person: 
+	current_pref = current_person.preferences[1]
+	current_pref.cross_off(current_pref.preferences[-1])
+
+	print("Rotation #" + str(num_rotations) + ":")
+	num_rotations = num_rotations + 1
+	pprint.pprint(Person.prefsMatrix())	
+
+	current_person = find_person_with_second_column()
+
+
+print("Phase 2 Complete:")
+pprint.pprint(Person.prefsMatrix())
+
+
+
+
