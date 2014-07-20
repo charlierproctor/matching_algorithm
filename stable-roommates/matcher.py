@@ -13,7 +13,7 @@ sys.setrecursionlimit(10000)
 # prefs = Tester.rosetta_marriage
 
 # random preference array generator in tester.py
-prefs = Tester.random_matrix(100)
+prefs = Tester.random_matrix(101)
 
 
 class Person:
@@ -84,20 +84,12 @@ pprint.pprint(Person.prefsMatrix())
 
 # PHASE 1
 
-# whether phase one was successful...
-# ie, the first columns hold distinct people
-def phase_one_success():
-	arr = []
-	for person in Person.ppl.values():  
-		arr.append(person.preferences[0].name)
-	return len(arr)==len(set(arr))
-
 #core of phase 1 --> everybody proposes to their top choice
 for person in Person.ppl.values():
-	person.propose_to(person.preferences[0])
-
-if not phase_one_success():
-	print("PHASE 1 FAILURE -- NO STABLE MATCHING POSSIBLE")
+	# before proposing, we need to make sure everybody hasn't rejected them yet!
+	# this would happen iff everybody else has already received better offers...
+	if len(person.preferences) > 0:       
+		person.propose_to(person.preferences[0])  # propose to your top choice
 
 print("Phase 1 Complete:")
 pprint.pprint(Person.prefsMatrix())
