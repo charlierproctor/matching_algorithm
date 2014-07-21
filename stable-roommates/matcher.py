@@ -56,6 +56,16 @@ class Person:
 			person.propose_to(person.current_prefs[0])     
 		# why do they always propose to their top choice??  
 		# (even if we haven't crossed off their old top choice?)
+	
+	# find a person who still has a second column
+	# return False if there is no person left
+	def find_person_with_second_column():
+		res = False
+		for person in Person.ppl.values():
+			if len(person.current_prefs) > 1:
+				res = person
+				break
+		return res
 
 	#return just the names of the people in the preference arrays
 	def getPrefs(self,time):
@@ -128,18 +138,8 @@ pprint.pprint(Person.prefsMatrix('current'))
 
 # PHASE 2
 
-# find a person who still has a second column
-# return False if there is no person left
-def find_person_with_second_column():
-	res = False
-	for person in Person.ppl.values():
-		if len(person.current_prefs) > 1:
-			res = person
-			break
-	return res
-
 #find the initial person with a second column
-current_person = find_person_with_second_column()    
+current_person = Person.find_person_with_second_column()    
 
 num_rotations = 1    # number of rotations so far...
 
@@ -161,7 +161,7 @@ while current_person:
 	pprint.pprint(Person.prefsMatrix('current'))	
 
 	# find another person to work with... if there is one
-	current_person = find_person_with_second_column()
+	current_person = Person.find_person_with_second_column()
 
 
 print("Phase 2 Complete:")
