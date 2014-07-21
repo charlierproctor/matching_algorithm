@@ -1,3 +1,5 @@
+# a person class - this defines most of the key matching methods
+
 class Person:
 	def __init__(self, name):
 		self.name = name

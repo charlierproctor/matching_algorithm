@@ -1,14 +1,16 @@
+# runs multiple tests on the matching algorithm
+
 import matchmaker,matrices,result
 from stats import GroupStat
 
 #constants...
 
 SMALLEST_GROUP = 80
-LARGEST_GROUP = 100
+LARGEST_GROUP = 120
 
 INCREMENT = 2
 
-TESTS_PER_GROUP_SIZE = 4
+TESTS_PER_GROUP_SIZE = 2
 
 # iterate over all group sizes in the testing range
 for group_size in range(SMALLEST_GROUP,LARGEST_GROUP+1,INCREMENT):

@@ -1,4 +1,4 @@
-# generates a random preference matrix
+# methods to generate a random preference matrix
 
 import random, pprint
 

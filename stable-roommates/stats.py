@@ -1,3 +1,6 @@
+# a class to track stats related to testing the algorithm multiple times 
+# on different group sizes
+
 class GroupStat:
 	# each object is for a different group size
 

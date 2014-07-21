@@ -1,3 +1,5 @@
+# a class to track results of a single test run
+
 from stats import GroupStat
 
 class Result:

@@ -1,4 +1,6 @@
 # Stable Roommate Algorithm
+# this is where the action happens!!
+
 import pprint, sys
 
 from person import Person
