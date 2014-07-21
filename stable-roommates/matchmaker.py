@@ -1,5 +1,5 @@
 # Stable Roommate Algorithm
-import pprint, sys, matrices
+import pprint, sys
 
 from person import Person
 from result import Result 
@@ -86,15 +86,3 @@ def execute(prefs, print_output, recursion_limit=10000):
 				print("The match is NOT stable.")
 
 	return Result(Person.ppl,ppl_without_match,stable)
-
-
-# standard stable roommate preference array (from wikipedia)
-# prefs = tests.wiki_roommate
-
-# standard stable marriage preference array (from rosetta code)
-# prefs = tests.rosetta_marriage
-
-# random preference array generator in tests.py
-prefs = matrices.random_matrix(4)
-
-execute(prefs,True)
