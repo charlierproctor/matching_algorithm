@@ -18,6 +18,7 @@ class GroupStat:
 		self.stable_count = 0
 		self.test_count = 0
 
+	# methods to increase various result counts...
 	def increase_test_count(self):
 		GroupStat.total_tests = GroupStat.total_tests + 1
 		self.test_count = self.test_count + 1
@@ -34,6 +35,7 @@ class GroupStat:
 		self.stable_count = self.stable_count + 1
 		GroupStat.total_stable_count = GroupStat.total_stable_count + 1
 
+	# methods to calculate percentages
 	def total_percent_stable():
 		return round(GroupStat.total_stable_count / GroupStat.total_tests * 100,2)
 
@@ -43,22 +45,27 @@ class GroupStat:
 	def total_percent_multiple_unmatched():
 		return round(GroupStat.total_multiple_unmatched / GroupStat.total_tests * 100,2)
 
+	# method to nicely display the results for a GroupStat
 	def print_nicely():
-		print("*"*80)
+		print("*"*80)			# a header of sorts...
 		print("Size \t\t Tests \t\t One \t\t Mult. \t\t Stable")
 		print("*"*80)
 
+		# individual GroupStat results (results for each different group size)
 		for group in GroupStat.all_groups:
 			print(str(group.group_size) + "\t\t" + str(group.test_count) + "\t\t" +
 				str(group.one_unmatched) + "\t\t" + str(group.multiple_unmatched)
 				+ "\t\t" + str(group.stable_count))
 
+		# overall results (as a sum of GroupStat results)
 		print("*"*80)
 		print("SUM" + "\t\t" + str(GroupStat.total_tests) + "\t\t" +
 			str(GroupStat.total_one_unmatched) + "\t\t" 
 			+ str(GroupStat.total_multiple_unmatched) 
 			+ "\t\t" + str(GroupStat.total_stable_count))		
 		print("*"*80)
+
+		# overall results (percentages)
 		print("Percent One Unmatch: " + str(GroupStat.total_percent_one_unmatch()))
 		print("Percent Multiple Unmatch: " + str(GroupStat.total_percent_multiple_unmatched()))				
 		print("*"*80)		

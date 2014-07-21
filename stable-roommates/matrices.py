@@ -2,6 +2,7 @@
 
 import random, pprint
 
+# generates a random list of numbers 1-length, excluding *current*
 def random_list(length,current):
 	arr = []
 	nums = list(range(1,length+1))
@@ -12,6 +13,7 @@ def random_list(length,current):
 		nums.remove(next_num)
 	return arr
 
+# generates a random preference matrix
 def random_matrix(num_elem):
 	res = {}
 	for i in range(1,num_elem+1):
