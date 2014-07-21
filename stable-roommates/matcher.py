@@ -75,20 +75,40 @@ class Person:
 			res[person_name] = person_object.getPrefs(time)
 		return res
 
+	def setup(prefs):
+		# create ppl hash which have names as keys
+		# and the corresponding person objects as values
+		for person in prefs:
+			Person.ppl[person] = Person(person)
+
+		# add the appropriate person objects to their preference array
+		for person_name,person_object in Person.ppl.items():   # the person
+			for pref_name in prefs[person_name]:      #their current_prefs
+				# populate the initial preference array
+				person_object.initial_prefs.append(Person.ppl[pref_name])
+				# populate the current preference array
+				person_object.current_prefs.append(Person.ppl[pref_name])
+
+	# determines whether everybody was matched
+	def were_people_matched():
+		ppl_without_match = []
+		for person_name,person_object in Person.ppl.items():
+			if len(person_object.current_prefs) != 1:
+				# they don't have a match!
+				ppl_without_match.append(person_object)
+		if len(ppl_without_match) > 0:
+			#some people weren't matched
+			print("The following individuals were unmatched:")
+			for unmatched in ppl_without_match:
+				print(unmatched.name)
+		else:
+			#everybody was successfully matched
+			print("Everybody was matched.\n")
+
+
 # SETUP --> CREATE PERSON OBJECTS
 
-# create ppl hash which have names as keys
-# and the corresponding person objects as values
-for person in prefs:
-	Person.ppl[person] = Person(person)
-
-# add the appropriate person objects to their preference array
-for person_name,person_object in Person.ppl.items():   # the person
-	for pref_name in prefs[person_name]:      #their current_prefs
-		# populate the initial preference array
-		person_object.initial_prefs.append(Person.ppl[pref_name])
-		# populate the current preference array
-		person_object.current_prefs.append(Person.ppl[pref_name])
+Person.setup(prefs)
 
 print("Starting Preference Matrix -- Phase 0 Complete:")
 pprint.pprint(Person.prefsMatrix('current'))
@@ -147,9 +167,9 @@ while current_person:
 print("Phase 2 Complete:")
 pprint.pprint(Person.prefsMatrix('current'))
 
-# pprint.pprint(Person.prefsMatrix('initial'))
-# def stable_match():
-	# for person_name,person_object in Person.ppl:
+print("\nRESULTS:\n")
+
+Person.were_people_matched()
 
 
 
