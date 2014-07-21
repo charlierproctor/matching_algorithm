@@ -4,10 +4,6 @@ from tests import Matrix
 from person import Person
 from result import Result 
 
-# adjust the system's recursion call depth limit
-# default of 1000
-sys.setrecursionlimit(10000)
-
 # standard stable roommate preference array (from wikipedia)
 # prefs = Matrix.wiki_roommate
 
@@ -17,7 +13,10 @@ sys.setrecursionlimit(10000)
 # random preference array generator in tests.py
 prefs = Matrix.random_matrix(4)
 
-def execute(print_output):
+def execute(print_output, recursion_limit=10000):
+	# adjust the system's recursion call depth limit
+	# system default is 1000
+	sys.setrecursionlimit(recursion_limit)
 
 	# SETUP --> CREATE PERSON OBJECTS
 	Person.setup(prefs)
