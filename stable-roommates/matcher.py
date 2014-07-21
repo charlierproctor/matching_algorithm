@@ -1,19 +1,10 @@
 # Stable Roommate Algorithm
-import pprint, sys
-from tests import Matrix 
+import pprint, sys, tests
+
 from person import Person
 from result import Result 
 
-# standard stable roommate preference array (from wikipedia)
-# prefs = Matrix.wiki_roommate
-
-# standard stable marriage preference array (from rosetta code)
-# prefs = Matrix.rosetta_marriage
-
-# random preference array generator in tests.py
-prefs = Matrix.random_matrix(4)
-
-def execute(print_output, recursion_limit=10000):
+def execute(prefs, print_output, recursion_limit=10000):
 	# adjust the system's recursion call depth limit
 	# system default is 1000
 	sys.setrecursionlimit(recursion_limit)
@@ -96,4 +87,14 @@ def execute(print_output, recursion_limit=10000):
 
 	return Result(Person.ppl,ppl_without_match,stable)
 
-execute(True)
+
+# standard stable roommate preference array (from wikipedia)
+# prefs = tests.wiki_roommate
+
+# standard stable marriage preference array (from rosetta code)
+# prefs = tests.rosetta_marriage
+
+# random preference array generator in tests.py
+prefs = tests.random_matrix(4)
+
+execute(prefs,True)
