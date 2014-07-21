@@ -4,7 +4,7 @@ import pprint, sys
 from person import Person
 from result import Result 
 
-def execute(prefs, print_output, recursion_limit=10000):
+def execute(prefs, print_output=True, recursion_limit=10000):
 	# adjust the system's recursion call depth limit
 	# system default is 1000
 	sys.setrecursionlimit(recursion_limit)
