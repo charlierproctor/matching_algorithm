@@ -16,7 +16,7 @@ class Matrix:
 	def random_matrix(num_elem):
 		res = {}
 		for i in range(1,num_elem+1):
-			res[str(i)] = Tester.random_list(num_elem,i)
+			res[str(i)] = Matrix.random_list(num_elem,i)
 		return res
 
 	# standard stable roommate preference array (from wikipedia)
