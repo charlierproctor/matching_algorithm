@@ -72,7 +72,7 @@ def execute(prefs, print_output=True, recursion_limit=10000):
 	if len(ppl_without_match) == 0:
 		stable = Person.was_the_match_stable()
 
-	result = Result(Person.ppl,ppl_without_match,stable)
+	result = Result(Person.ppl,ppl_without_match,stable,Person.prefsMatrix("initial"))
 
 	if print_output:
 		result.print_nicely()
