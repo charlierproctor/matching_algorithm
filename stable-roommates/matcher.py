@@ -1,5 +1,5 @@
 # Stable Roommate Algorithm
-import pprint, sys, tests
+import pprint, sys, matrices
 
 from person import Person
 from result import Result 
@@ -95,6 +95,6 @@ def execute(prefs, print_output, recursion_limit=10000):
 # prefs = tests.rosetta_marriage
 
 # random preference array generator in tests.py
-prefs = tests.random_matrix(4)
+prefs = matrices.random_matrix(4)
 
 execute(prefs,True)
