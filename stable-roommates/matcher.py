@@ -13,7 +13,7 @@ sys.setrecursionlimit(10000)
 # prefs = Tester.rosetta_marriage
 
 # random preference array generator in tester.py
-prefs = Tester.random_matrix(12)
+prefs = Tester.random_matrix(4)
 
 
 class Person:
@@ -100,20 +100,35 @@ class Person:
 				person_object.current_prefs.append(Person.ppl[pref_name])
 
 	# determines whether everybody was matched
-	def were_people_matched():
+	def who_wasnt_matched():
 		ppl_without_match = []
 		for person_name,person_object in Person.ppl.items():
 			if len(person_object.current_prefs) != 1:
 				# they don't have a match!
 				ppl_without_match.append(person_object)
-		if len(ppl_without_match) > 0:
-			#some people weren't matched
-			print("The following individuals were unmatched:")
-			for unmatched in ppl_without_match:
-				print(unmatched.name)
-		else:
-			#everybody was successfully matched
-			print("Everybody was matched.\n")
+		return ppl_without_match
+
+	def better_prefs(self):
+		initial_prefs = self.initial_prefs
+		# pprint.pprint(initial_prefs)
+		final_prefs = self.current_prefs
+		match = final_prefs[0]
+		better_prefs = initial_prefs[:initial_prefs.index(match)]
+		def person_name_string(obj):
+			return obj.name
+		# print(self.name + "," + str(list(map(person_name_string,better_prefs))))
+		return better_prefs
+
+	def was_the_match_stable():
+		stable = True
+		for my_name, my_object in Person.ppl.items():
+			my_better_ppl = my_object.better_prefs()
+			for person in my_better_ppl:
+				their_better_ppl = person.better_prefs()
+				if my_object in their_better_ppl:
+					stable = False
+					break
+		return stable
 
 
 # SETUP --> CREATE PERSON OBJECTS
@@ -169,8 +184,19 @@ pprint.pprint(Person.prefsMatrix('current'))
 
 print("\nRESULTS:\n")
 
-Person.were_people_matched()
+ppl_without_match = Person.who_wasnt_matched()
 
-
+if len(ppl_without_match) > 0:
+	#some people weren't matched
+	print("The following individuals were unmatched:")
+	for unmatched in ppl_without_match:
+		print(unmatched.name)
+else:
+	#everybody was successfully matched
+	print("Everybody is matched.\n")
+	if Person.was_the_match_stable():
+		print("The match is stable.\n")
+	else:
+		print("The match is NOT stable.")
 
 
