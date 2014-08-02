@@ -6,11 +6,11 @@ from stats import GroupStat
 #constants...
 
 SMALLEST_GROUP = 40
-LARGEST_GROUP = 60
+LARGEST_GROUP = 80
 
 INCREMENT = 2
 
-TESTS_PER_GROUP_SIZE = 4
+TESTS_PER_GROUP_SIZE = 8
 
 # iterate over all group sizes in the testing range
 for group_size in range(SMALLEST_GROUP,LARGEST_GROUP+1,INCREMENT):

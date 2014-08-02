@@ -31,6 +31,9 @@ def execute(prefs, print_output=True, recursion_limit=10000):
 		print("Phase 1 Complete:")
 		pprint.pprint(Person.prefsMatrix('current'))
 
+	has_empty_column_after_phase_one = Person.empty_column()
+
+	print("Empty column --> " + str(has_empty_column_after_phase_one))
 
 	# PHASE 2
 
@@ -76,5 +79,8 @@ def execute(prefs, print_output=True, recursion_limit=10000):
 
 	if print_output:
 		result.print_nicely()
+
+	if (not stable) and (not has_empty_column_after_phase_one):
+		raise Exception("The match was unstable, yet there was not an empty column at the end of phase one.")
 
 	return result

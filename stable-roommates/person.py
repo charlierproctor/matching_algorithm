@@ -113,3 +113,11 @@ class Person:
 					stable = False
 					break
 		return stable
+
+	def empty_column():
+		empty = False
+		for person in Person.ppl.values():
+			if len(person.current_prefs) == 0:
+				empty = True
+				break
+		return empty
