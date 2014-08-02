@@ -31,8 +31,8 @@ def execute(prefs, print_output=True, recursion_limit=10000):
 		print("Phase 1 Complete:")
 		pprint.pprint(Person.prefsMatrix('current'))
 
+	# does anybody have an empty column at the end of phase one?
 	has_empty_column_after_phase_one = Person.empty_column()
-
 	print("Empty column --> " + str(has_empty_column_after_phase_one))
 
 	# PHASE 2
@@ -69,17 +69,22 @@ def execute(prefs, print_output=True, recursion_limit=10000):
 
 		print("\nRESULTS:\n")
 
+	# who wasn't matched?
 	ppl_without_match = Person.who_wasnt_matched()
 	stable = False
 
+	#if everybody was matched, was the match stable?
 	if len(ppl_without_match) == 0:
 		stable = Person.was_the_match_stable()
 
+	# grab the corresponding result object
 	result = Result(Person.ppl,ppl_without_match,stable,Person.prefsMatrix("initial"))
 
 	if print_output:
 		result.print_nicely()
 
+	# HYPOTHESIS: if there is not an empty column at the end of phase one,
+	# there should be a stable match --> but this is currently NOT the case
 	if (not stable) and (not has_empty_column_after_phase_one):
 		raise Exception("The match was unstable, yet there was not an empty column at the end of phase one.")
 

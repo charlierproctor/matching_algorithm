@@ -11,7 +11,7 @@ class Result:
 		self.unmatched = unmatched
 		self.stable = stable
 
-		# my hypothesis --> when everybody is matched, the result is stable!!
+		# HYPOTHESIS: when everybody is matched, the result is stable!!
 		if (len(self.unmatched) == 0) and (not self.stable):
 			print("*"*80)
 			print("ERROR")
