@@ -1,4 +1,5 @@
 # Stable Marriage Algorithm
+# inspired by http://rosettacode.org/wiki/Stable_marriage_problem#Ruby
 
 prefs = {
   'abe'  => %w[abi eve cath ivy jan dee fay bea hope gay],
