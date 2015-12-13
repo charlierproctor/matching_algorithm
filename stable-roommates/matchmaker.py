@@ -85,7 +85,7 @@ def execute(prefs, print_output=True, recursion_limit=10000):
 
 	# HYPOTHESIS: if there is not an empty column at the end of phase one,
 	# there should be a stable match --> but this is currently NOT the case
-	if (not stable) and (not has_empty_column_after_phase_one):
-		raise Exception("The match was unstable, yet there was not an empty column at the end of phase one.")
+	# if (not stable) and (not has_empty_column_after_phase_one):
+		# raise Exception("The match was unstable, yet there was not an empty column at the end of phase one.")
 
 	return result

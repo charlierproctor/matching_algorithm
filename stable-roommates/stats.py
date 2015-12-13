@@ -39,16 +39,20 @@ class GroupStat:
 		GroupStat.total_stable_count = GroupStat.total_stable_count + 1
 
 	# methods to calculate percentages
+	@staticmethod
 	def total_percent_stable():
 		return round(GroupStat.total_stable_count / GroupStat.total_tests * 100,2)
 
+	@staticmethod
 	def total_percent_one_unmatch():
 		return round(GroupStat.total_one_unmatched / GroupStat.total_tests * 100,2)		
 
+	@staticmethod
 	def total_percent_multiple_unmatched():
 		return round(GroupStat.total_multiple_unmatched / GroupStat.total_tests * 100,2)
 
 	# method to nicely display the results for a GroupStat
+	@staticmethod
 	def print_nicely():
 		print("*"*80)			# a header of sorts...
 		print("Size \t\t Tests \t\t One \t\t Mult. \t\t Stable")

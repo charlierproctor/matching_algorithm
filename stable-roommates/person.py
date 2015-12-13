@@ -43,6 +43,7 @@ class Person:
 	
 	# find a person who still has a second column
 	# return False if there is no person left
+	@staticmethod
 	def find_person_with_second_column():
 		res = False
 		for person in Person.ppl.values():
@@ -63,12 +64,14 @@ class Person:
 		return res
 
 	# generates the hash to display all people's preferences
+	@staticmethod
 	def prefsMatrix(time):
 		res = {}
 		for person_name,person_object in Person.ppl.items():
 			res[person_name] = person_object.getPrefs(time)
 		return res
 
+	@staticmethod
 	def setup(prefs):
 		# create ppl hash which have names as keys
 		# and the corresponding person objects as values
@@ -84,6 +87,7 @@ class Person:
 				person_object.current_prefs.append(Person.ppl[pref_name])
 
 	# determines whether everybody was matched
+	@staticmethod
 	def who_wasnt_matched():
 		ppl_without_match = []
 		for person_name,person_object in Person.ppl.items():
@@ -103,6 +107,7 @@ class Person:
 		# print(self.name + "," + str(list(map(person_name_string,better_prefs))))
 		return better_prefs
 
+	@staticmethod
 	def was_the_match_stable():
 		stable = True
 		for my_name, my_object in Person.ppl.items():
@@ -114,6 +119,7 @@ class Person:
 					break
 		return stable
 
+	@staticmethod
 	def empty_column():
 		empty = False
 		for person in Person.ppl.values():
